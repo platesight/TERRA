@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Hero from "@/components/home/Hero";
 import ThreePillCards from "@/components/home/ThreePillCards";
-import SplineSceneBasic from "@/components/home/SplineSceneBasic";
 import EventsTease from "@/components/home/EventsTease";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -13,7 +12,6 @@ export default function Home() {
       <Header />
       <main className="flex-grow bg-terra-charcoal">
         <Hero />
-        <SplineSceneBasic />
         <ThreePillCards />
         <EventsTease />
       </main>
