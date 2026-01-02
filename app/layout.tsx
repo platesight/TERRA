@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "TERRA — Plates & Pour",
-  description: "Aurangabad's curated evening. Plates, Pour, and Vibe.",
+  description: "Ch. Sambhaji nagar's curated evening. Plates, Pour, and Vibe.",
 };
 
 export default function RootLayout({

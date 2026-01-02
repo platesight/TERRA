@@ -70,7 +70,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             </nav>
 
             <div className="absolute bottom-12 text-center text-white/40 text-xs tracking-widest uppercase">
-                <p>Aurangabad</p>
+                <p>Ch. Sambhaji nagar</p>
             </div>
         </div>
     );

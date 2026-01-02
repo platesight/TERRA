@@ -73,7 +73,7 @@ function Hero() {
                         Plates & Pour
                     </p>
                     <p className="text-sm md:text-base text-gray-300 font-light mb-12 max-w-md">
-                        Aurangabad's curated evening—where light, sound and conversation meet.
+                        Ch. Sambhaji nagar's curated evening—where light, sound and conversation meet.
                     </p>
 
                     {/* CTA - Hidden on mobile (sticky CTA handles mobile) */}
