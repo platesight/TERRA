@@ -1,11 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const CARDS = [
     {
@@ -26,8 +21,6 @@ const CARDS = [
 ];
 
 export default function ThreePillCards() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     return (
         <section className="relative w-full py-24 bg-terra-charcoal z-10">
@@ -38,23 +31,24 @@ export default function ThreePillCards() {
 
             {/* Horizontal Scroll Container */}
             <div
-                ref={scrollContainerRef}
                 className="flex w-full overflow-x-auto snap-x snap-mandatory no-scrollbar px-6 md:px-12 gap-4 md:gap-8 pb-12"
             >
                 {CARDS.map((card, idx) => (
                     <div
                         key={idx}
-                        className="relative flex-none w-[85vw] md:w-[40vw] lg:w-[30vw] aspect-[3/4] md:aspect-[4/5] snap-center group overflow-hidden cursor-pointer"
+                        className="relative flex-none w-[85vw] md:w-[40vw] lg:w-[30vw] h-[113vw] md:h-[50vw] lg:h-[40vw] snap-center group overflow-hidden cursor-pointer"
                     >
                         <Image
                             src={card.image}
                             alt={card.title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            priority
+                            sizes="(max-width: 768px) 85vw, (max-width: 1200px) 40vw, 30vw"
+                            className="object-cover transition-transform duration-700 group-hover:scale-110 z-0"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 z-10" />
 
-                        <div className="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-20">
                             <h3 className="text-4xl font-serif text-white mb-2">{card.title}</h3>
                             <p className="text-sm uppercase tracking-widest text-terra-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                 {card.subtitle}

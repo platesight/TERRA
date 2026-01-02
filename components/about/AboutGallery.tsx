@@ -52,6 +52,7 @@ export default function AboutGallery() {
                         src={src}
                         alt={`Terra Experience ${idx + 1}`}
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                 </div>

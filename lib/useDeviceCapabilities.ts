@@ -15,6 +15,8 @@ interface DeviceCapabilities {
 }
 
 export function useDeviceCapabilities(): DeviceCapabilities {
+    // Initialize with a safe default that matches server rendering (desktop)
+    // to prevent hydration mismatches.
     const [capabilities, setCapabilities] = useState<DeviceCapabilities>({
         isMobile: false,
         isTablet: false,
@@ -23,9 +25,11 @@ export function useDeviceCapabilities(): DeviceCapabilities {
         isAndroid: false,
         isWindows: false,
         isMacOS: false,
-        supportsAR: false,
+        supportsAR: false, // Server assumes no AR support
         deviceType: "desktop",
     });
+
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
         // Only run on client
@@ -77,6 +81,7 @@ export function useDeviceCapabilities(): DeviceCapabilities {
             supportsAR,
             deviceType,
         });
+        setIsMounted(true);
     }, []);
 
     return capabilities;

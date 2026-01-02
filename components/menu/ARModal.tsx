@@ -26,6 +26,9 @@ export default function ARModal({ isOpen, onClose, modelSrc, posterSrc, dishName
         if (isOpen) {
             setLoading(true);
             setError(false);
+            if (customElements.get('model-viewer')) {
+                setModelViewerLoaded(true);
+            }
         }
     }, [isOpen]);
 
@@ -135,26 +138,29 @@ export default function ARModal({ isOpen, onClose, modelSrc, posterSrc, dishName
                             field-of-view="30deg"
                             interaction-prompt="auto"
                             loading="eager"
+                            suppressHydrationWarning
                             class="w-full h-full"
                             style={{ width: "100%", height: "100%", backgroundColor: "#1a1a1a" }}
                         >
-                            {/* AR Button - Only show on supported devices */}
-                            {supportsAR && (
-                                <button slot="ar-button" className="absolute bottom-8 right-8 bg-terra-gold text-terra-charcoal px-6 py-3 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors flex items-center gap-2 shadow-lg">
-                                    <Smartphone size={16} />
-                                    View in AR
-                                </button>
-                            )}
+                            <div suppressHydrationWarning>
+                                {/* AR Button - Only show on supported devices */}
+                                {supportsAR && (
+                                    <button slot="ar-button" className="absolute bottom-8 right-8 bg-terra-gold text-terra-charcoal px-6 py-3 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors flex items-center gap-2 shadow-lg">
+                                        <Smartphone size={16} />
+                                        View in AR
+                                    </button>
+                                )}
 
-                            {/* AR Not Supported Warning - Desktop */}
-                            {!supportsAR && (
-                                <div className="absolute bottom-8 right-8 flex items-start gap-2 p-4 bg-red-900/20 border border-red-500/30 rounded-sm max-w-xs">
-                                    <AlertCircle size={16} className="text-red-400 flex-shrink-0 mt-0.5" />
-                                    <p className="text-xs text-red-300 leading-relaxed">
-                                        AR view is available only on supported mobile devices (Android & iOS).
-                                    </p>
-                                </div>
-                            )}
+                                {/* AR Not Supported Warning - Desktop */}
+                                {!supportsAR && (
+                                    <div className="absolute bottom-8 right-8 flex items-start gap-2 p-4 bg-red-900/20 border border-red-500/30 rounded-sm max-w-xs">
+                                        <AlertCircle size={16} className="text-red-400 flex-shrink-0 mt-0.5" />
+                                        <p className="text-xs text-red-300 leading-relaxed">
+                                            AR view is available only on supported mobile devices (Android & iOS).
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
                         </model-viewer>
                     )}
 

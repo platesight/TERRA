@@ -35,6 +35,7 @@ export default function MenuCard({ name, desc, image, onView3D, onViewAR }: Menu
                     src={image}
                     alt={name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-terra-charcoal via-transparent to-transparent opacity-60" />
@@ -61,6 +62,7 @@ export default function MenuCard({ name, desc, image, onView3D, onViewAR }: Menu
                     {/* View in AR - Always clickable, shows warning on desktop */}
                     <button
                         onClick={handleARClick}
+                        suppressHydrationWarning
                         className={`flex items-center justify-center gap-2 px-6 py-3 border uppercase text-xs tracking-widest transition-all ${supportsAR
                             ? "border-terra-gold text-terra-gold hover:bg-terra-gold hover:text-terra-charcoal cursor-pointer"
                             : "border-white/20 text-white hover:border-terra-gold hover:bg-terra-gold/10 cursor-pointer"

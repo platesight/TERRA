@@ -62,11 +62,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     About
                 </Link>
 
-                <button
-                    className="mt-8 px-8 py-3 border border-terra-gold text-terra-gold uppercase tracking-widest hover:bg-terra-gold hover:text-terra-charcoal transition-all"
-                >
-                    Reserve Table
-                </button>
+
             </nav>
 
             <div className="absolute bottom-12 text-center text-white/40 text-xs tracking-widest uppercase">

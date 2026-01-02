@@ -44,17 +44,17 @@ function Hero() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.03)_0%,transparent_70%)]" />
             </div>
 
-            {/* Robot Sculpture - Right Third (now more prominent) */}
-            <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block pointer-events-none">
+            {/* Robot Sculpture - Visible on Desktop & Mobile now */}
+            <div className="absolute inset-0 lg:left-auto lg:right-0 lg:w-1/2 pointer-events-none z-0 mix-blend-lighten opacity-80 lg:opacity-100">
                 <div
-                    className="w-full h-full flex items-center justify-center"
+                    className="w-full h-full flex items-center justify-center transform scale-110 lg:scale-150 translate-y-12 lg:translate-y-0"
                     style={{
-                        willChange: 'auto'
+                        willChange: 'transform'
                     }}
                 >
                     <SplineScene
                         scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                        className="w-full h-full scale-150"
+                        className="w-full h-full"
                     />
                 </div>
             </div>

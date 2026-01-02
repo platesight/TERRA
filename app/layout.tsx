@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import StickyReserveCTA from "@/components/ui/StickyReserveCTA";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,7 +26,6 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable} antialiased`}>
       <body className="bg-terra-charcoal text-white overflow-x-hidden">
         {children}
-        <StickyReserveCTA />
       </body>
     </html>
   );
