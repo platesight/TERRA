@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,7 +14,7 @@ const IMAGES = [
     "/assets/about/terraphoto8.png",
 ];
 
-export default function AboutGallery() {
+function AboutGallery() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -60,3 +60,5 @@ export default function AboutGallery() {
         </div>
     );
 }
+
+export default memo(AboutGallery);

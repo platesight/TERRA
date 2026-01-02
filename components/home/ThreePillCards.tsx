@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { memo } from "react";
 
 const CARDS = [
     {
@@ -20,7 +21,7 @@ const CARDS = [
     },
 ];
 
-export default function ThreePillCards() {
+function ThreePillCards() {
 
     return (
         <section className="relative w-full py-24 bg-terra-charcoal z-10">
@@ -60,3 +61,5 @@ export default function ThreePillCards() {
         </section>
     );
 }
+
+export default memo(ThreePillCards);

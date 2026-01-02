@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import Image from "next/image";
 import { Eye, Smartphone, AlertCircle, X } from "lucide-react";
 import { useDeviceCapabilities } from "@/lib/useDeviceCapabilities";
@@ -13,11 +13,11 @@ interface MenuCardProps {
     onViewAR: () => void;
 }
 
-export default function MenuCard({ name, desc, image, onView3D, onViewAR }: MenuCardProps) {
+function MenuCard({ name, desc, image, onView3D, onViewAR }: MenuCardProps) {
     const { supportsAR } = useDeviceCapabilities();
     const [showARWarning, setShowARWarning] = useState(false);
 
-    const handleARClick = () => {
+    const handleARClick = useCallback(() => {
         if (supportsAR) {
             onViewAR();
         } else {
@@ -25,7 +25,7 @@ export default function MenuCard({ name, desc, image, onView3D, onViewAR }: Menu
             // Auto-hide after 5 seconds
             setTimeout(() => setShowARWarning(false), 5000);
         }
-    };
+    }, [supportsAR, onViewAR]);
 
     return (
         <div className="group relative bg-terra-dark border border-white/10 overflow-hidden transition-all hover:border-terra-gold">
@@ -92,3 +92,5 @@ export default function MenuCard({ name, desc, image, onView3D, onViewAR }: Menu
         </div>
     );
 }
+
+export default memo(MenuCard);

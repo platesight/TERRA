@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import MenuCard from "./MenuCard";
 import ARModal from "./ARModal";
 
@@ -31,6 +31,18 @@ const MENU_ITEMS = [
 export default function SignatureMenu() {
     const [selectedModel, setSelectedModel] = useState<{ src: string; poster: string; name: string } | null>(null);
 
+    const handleView3D = useCallback((item: typeof MENU_ITEMS[0]) => {
+        setSelectedModel({ src: item.model, poster: item.image, name: item.name });
+    }, []);
+
+    const handleViewAR = useCallback((item: typeof MENU_ITEMS[0]) => {
+        setSelectedModel({ src: item.model, poster: item.image, name: item.name });
+    }, []);
+
+    const handleClose = useCallback(() => {
+        setSelectedModel(null);
+    }, []);
+
     return (
         <section className="py-24 max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
@@ -45,15 +57,15 @@ export default function SignatureMenu() {
                         name={item.name}
                         desc={item.desc}
                         image={item.image}
-                        onView3D={() => setSelectedModel({ src: item.model, poster: item.image, name: item.name })}
-                        onViewAR={() => setSelectedModel({ src: item.model, poster: item.image, name: item.name })}
+                        onView3D={() => handleView3D(item)}
+                        onViewAR={() => handleViewAR(item)}
                     />
                 ))}
             </div>
 
             <ARModal
                 isOpen={!!selectedModel}
-                onClose={() => setSelectedModel(null)}
+                onClose={handleClose}
                 modelSrc={selectedModel?.src || ""}
                 posterSrc={selectedModel?.poster || ""}
                 dishName={selectedModel?.name || ""}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, Component, ReactNode } from 'react'
+import { Suspense, lazy, Component, ReactNode, useRef, useCallback } from 'react'
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
 interface SplineSceneProps {
@@ -35,6 +35,15 @@ class SplineErrorBoundary extends Component<{ children: ReactNode }, { hasError:
 }
 
 export function SplineScene({ scene, className }: SplineSceneProps) {
+    const splineAppRef = useRef<any>(null);
+
+    const handleLoad = useCallback((splineApp: any) => {
+        splineAppRef.current = splineApp;
+        if (splineApp && typeof splineApp.setPixelRatio === 'function') {
+            splineApp.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        }
+    }, []);
+
     return (
         <SplineErrorBoundary>
             <Suspense
@@ -47,12 +56,7 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
                 <Spline
                     scene={scene}
                     className={className}
-                    onLoad={(splineApp: any) => {
-                        // Optimization: Limit pixel ratio
-                        if (splineApp && typeof splineApp.setPixelRatio === 'function') {
-                            splineApp.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-                        }
-                    }}
+                    onLoad={handleLoad}
                 />
             </Suspense>
         </SplineErrorBoundary>

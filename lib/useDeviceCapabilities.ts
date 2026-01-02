@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 interface DeviceCapabilities {
     isMobile: boolean;
@@ -15,8 +15,6 @@ interface DeviceCapabilities {
 }
 
 export function useDeviceCapabilities(): DeviceCapabilities {
-    // Initialize with a safe default that matches server rendering (desktop)
-    // to prevent hydration mismatches.
     const [capabilities, setCapabilities] = useState<DeviceCapabilities>({
         isMobile: false,
         isTablet: false,
@@ -25,43 +23,33 @@ export function useDeviceCapabilities(): DeviceCapabilities {
         isAndroid: false,
         isWindows: false,
         isMacOS: false,
-        supportsAR: false, // Server assumes no AR support
+        supportsAR: false,
         deviceType: "desktop",
     });
 
-    const [isMounted, setIsMounted] = useState(false);
-
     useEffect(() => {
-        // Only run on client
         if (typeof window === "undefined") return;
 
         const userAgent = navigator.userAgent.toLowerCase();
         const platform = navigator.platform?.toLowerCase() || "";
         const maxTouchPoints = navigator.maxTouchPoints || 0;
 
-        // OS Detection
         const isIOS = /iphone|ipad|ipod/.test(userAgent) || (platform === "macintel" && maxTouchPoints > 1);
         const isAndroid = /android/.test(userAgent);
         const isWindows = /win/.test(platform) || /windows/.test(userAgent);
         const isMacOS = /mac/.test(platform) && maxTouchPoints === 0;
 
-        // Device Type Detection
         const isMobileUA = /mobile|android|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
         const isTabletUA = /ipad|android(?!.*mobile)|tablet/i.test(userAgent);
 
-        // Screen size heuristics
         const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
         const isMobileScreen = screenWidth < 768;
         const isTabletScreen = screenWidth >= 768 && screenWidth < 1024;
 
-        // Combine heuristics
         const isMobile = (isMobileUA || (isMobileScreen && maxTouchPoints > 0)) && !isTabletUA;
         const isTablet = isTabletUA || (isTabletScreen && maxTouchPoints > 0);
         const isDesktop = !isMobile && !isTablet;
 
-        // AR Support Logic
-        // AR is ONLY supported on mobile devices (Android Chrome or iOS Safari)
         const supportsAR = (isAndroid || isIOS) && (isMobile || isTablet);
 
         const deviceType: "mobile" | "tablet" | "desktop" = isMobile
@@ -81,8 +69,7 @@ export function useDeviceCapabilities(): DeviceCapabilities {
             supportsAR,
             deviceType,
         });
-        setIsMounted(true);
     }, []);
 
-    return capabilities;
+    return useMemo(() => capabilities, [capabilities]);
 }

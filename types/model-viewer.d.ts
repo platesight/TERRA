@@ -11,10 +11,14 @@ declare namespace JSX {
             'auto-rotate'?: boolean;
             ar?: boolean;
             'ar-modes'?: string;
+            'ar-scale'?: string;
+            'ar-placement'?: string;
+            'xr-environment'?: boolean;
             'camera-orbit'?: string;
             'field-of-view'?: string;
             'interaction-prompt'?: string;
             loading?: string;
+            'environment-image'?: string;
             class?: string;
             style?: React.CSSProperties;
             ref?: React.Ref<any>;

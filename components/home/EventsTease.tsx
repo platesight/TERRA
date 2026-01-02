@@ -1,9 +1,12 @@
-export default function EventsTease() {
-    const events = [
-        { name: "The Red Circle", desc: "Curated Cocktails", date: "Every Friday" },
-        { name: "Sundowner", desc: "House & Techno", date: "Saturday 5PM" },
-        { name: "Sip & Bake", desc: "Pastry & Wine Pairing", date: "Sunday Brunch" },
-    ];
+import { memo } from "react";
+
+const EVENTS = [
+    { name: "The Red Circle", desc: "Curated Cocktails", date: "Every Friday" },
+    { name: "Sundowner", desc: "House & Techno", date: "Saturday 5PM" },
+    { name: "Sip & Bake", desc: "Pastry & Wine Pairing", date: "Sunday Brunch" },
+];
+
+function EventsTease() {
 
     return (
         <section className="bg-terra-dark py-20 border-t border-white/5">
@@ -14,7 +17,7 @@ export default function EventsTease() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {events.map((event, idx) => (
+                    {EVENTS.map((event, idx) => (
                         <div
                             key={idx}
                             className="group border border-white/10 p-8 hover:border-terra-gold/50 transition-colors duration-500 bg-terra-charcoal"
@@ -35,3 +38,5 @@ export default function EventsTease() {
         </section>
     );
 }
+
+export default memo(EventsTease);
