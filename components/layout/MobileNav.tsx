@@ -1,0 +1,77 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import gsap from "gsap";
+
+interface MobileNavProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const linksRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const tl = gsap.timeline({ paused: true });
+
+        tl.to(containerRef.current, {
+            y: "0%",
+            duration: 0.5,
+            ease: "power3.inOut",
+        });
+
+        if (isOpen) {
+            tl.play();
+        } else {
+            tl.reverse();
+        }
+    }, [isOpen]);
+
+    // Handle closing when clicking links
+    const handleLinkClick = () => {
+        onClose();
+    };
+
+    return (
+        <div
+            ref={containerRef}
+            className="fixed inset-0 bg-terra-charcoal z-40 flex flex-col justify-center items-center translate-y-full transform will-change-transform"
+        >
+            <nav ref={linksRef} className="flex flex-col items-center space-y-8">
+                <Link
+                    href="/"
+                    onClick={handleLinkClick}
+                    className="text-3xl font-serif text-white hover:text-terra-gold transition-colors"
+                >
+                    Home
+                </Link>
+                <Link
+                    href="/menu"
+                    onClick={handleLinkClick}
+                    className="text-3xl font-serif text-white hover:text-terra-gold transition-colors"
+                >
+                    Menu
+                </Link>
+                <Link
+                    href="/about"
+                    onClick={handleLinkClick}
+                    className="text-3xl font-serif text-white hover:text-terra-gold transition-colors"
+                >
+                    About
+                </Link>
+
+                <button
+                    className="mt-8 px-8 py-3 border border-terra-gold text-terra-gold uppercase tracking-widest hover:bg-terra-gold hover:text-terra-charcoal transition-all"
+                >
+                    Reserve Table
+                </button>
+            </nav>
+
+            <div className="absolute bottom-12 text-center text-white/40 text-xs tracking-widest uppercase">
+                <p>Aurangabad</p>
+            </div>
+        </div>
+    );
+}
