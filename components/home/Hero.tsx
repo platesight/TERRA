@@ -76,8 +76,8 @@ function Hero() {
                         Ch. Sambhaji nagar's curated evening—where light, sound and conversation meet.
                     </p>
 
-                    {/* CTA - Hidden on mobile (sticky CTA handles mobile) */}
-                    <a href="/menu" className="hidden md:block group relative px-8 py-3 overflow-hidden border border-white/30 rounded-none transition-all hover:border-terra-gold">
+                    {/* CTA - visible on all devices now */}
+                    <a href="/menu" className="block group relative px-8 py-3 overflow-hidden border border-white/30 rounded-none transition-all hover:border-terra-gold">
                         <span className="relative z-10 text-xs uppercase tracking-[0.2em] group-hover:text-terra-charcoal transition-colors duration-500">
                             View Menu
                         </span>

@@ -145,7 +145,7 @@ export default function ARModal({ isOpen, onClose, modelSrc, posterSrc, dishName
                             <div suppressHydrationWarning>
                                 {/* AR Button - Only show on supported devices */}
                                 {supportsAR && (
-                                    <button slot="ar-button" className="absolute bottom-8 right-8 bg-terra-gold text-terra-charcoal px-6 py-3 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors flex items-center gap-2 shadow-lg">
+                                    <button slot="ar-button" className="absolute bottom-8 left-8 bg-terra-gold text-terra-charcoal px-6 py-3 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors flex items-center gap-2 shadow-lg">
                                         <Smartphone size={16} />
                                         View in AR
                                     </button>
@@ -166,7 +166,7 @@ export default function ARModal({ isOpen, onClose, modelSrc, posterSrc, dishName
 
                     {/* Info Overlay */}
                     {!error && (
-                        <div className="absolute bottom-8 left-8 pointer-events-none">
+                        <div className="absolute top-8 left-8 pointer-events-none">
                             <h3 className="text-2xl font-serif text-white">{dishName}</h3>
                             <p className="text-white/50 text-xs mt-1">Drag to rotate • Pinch to zoom</p>
                         </div>
