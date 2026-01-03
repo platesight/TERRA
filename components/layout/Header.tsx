@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import gsap from "gsap";
@@ -9,6 +10,13 @@ import MobileNav from "./MobileNav";
 export default function Header() {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
     const headerRef = useRef<HTMLElement>(null);
+
+    const pathname = usePathname();
+
+    // Close mobile nav on route change
+    useEffect(() => {
+        setIsMobileNavOpen(false);
+    }, [pathname]);
 
     // Header scroll effect
     useEffect(() => {

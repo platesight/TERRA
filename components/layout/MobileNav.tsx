@@ -14,19 +14,26 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
     const linksRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const tl = gsap.timeline({ paused: true });
-
-        tl.to(containerRef.current, {
-            y: "0%",
-            duration: 0.5,
-            ease: "power3.inOut",
-        });
-
         if (isOpen) {
-            tl.play();
+            gsap.to(containerRef.current, {
+                y: "0%",
+                duration: 0.5,
+                ease: "power3.inOut",
+            });
+            document.body.style.overflow = "hidden";
         } else {
-            tl.reverse();
+            gsap.to(containerRef.current, {
+                y: "100%",
+                duration: 0.5,
+                ease: "power3.inOut",
+            });
+            document.body.style.overflow = "";
         }
+
+        // Cleanup to ensure scrolling is restored if component unmounts
+        return () => {
+            document.body.style.overflow = "";
+        };
     }, [isOpen]);
 
     // Handle closing when clicking links
